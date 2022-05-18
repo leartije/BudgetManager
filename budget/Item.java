@@ -30,11 +30,6 @@ public class Item implements Comparable<Item> {
 
     @Override
     public int compareTo(Item o) {
-        if (o.getItemPrice() == this.getItemPrice()) {
-            return 0;
-        } else if (o.getItemPrice() > this.getItemPrice()) {
-            return 1;
-        }
-        return -1;
+        return Double.compare(o.itemPrice, this.itemPrice);
     }
 }
