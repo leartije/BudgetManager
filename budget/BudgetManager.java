@@ -1,22 +1,26 @@
 package budget;
 
+import budget.repository.IOClass;
+import budget.services.BudgetServices;
+import budget.services.SortingServices;
+
 import java.io.File;
 
-import static budget.Categories.*;
+import static budget.staticandenums.Categories.*;
 import static budget.Main.scanner;
-import static budget.MenusAndMsg.*;
+import static budget.staticandenums.MenusAndMsg.*;
 
-public class ServiceClass {
+public class BudgetManager {
 
-    private final BudgetClass budget;
+    private final BudgetServices budget;
     private final IOClass ioClass;
-    private final Sorting sorting;
+    private final SortingServices sortingServices;
 
-    public ServiceClass() {
-        this.budget = new BudgetClass();
+    public BudgetManager() {
+        this.budget = new BudgetServices();
         File file = new File(FILE_NAME);
         this.ioClass = new IOClass(file, this.budget);
-        this.sorting = new Sorting(this.budget);
+        this.sortingServices = new SortingServices(this.budget);
     }
 
     public void startProgram() {
@@ -138,10 +142,10 @@ public class ServiceClass {
             System.out.println();
             switch (option) {
                 case "1":
-                    sorting.sortAll();
+                    sortingServices.sortAll();
                     break;
                 case "2":
-                    sorting.sortByCertainType();
+                    sortingServices.sortByCertainType();
                     break;
                 case "3":
                     analyzeSubSubMenu();
@@ -164,16 +168,16 @@ public class ServiceClass {
         System.out.println();
         switch (options) {
             case "1":
-                sorting.sortByCertainType(FOOD);
+                sortingServices.sortByCertainType(FOOD);
                 break;
             case "2":
-                sorting.sortByCertainType(CLOTHES);
+                sortingServices.sortByCertainType(CLOTHES);
                 break;
             case "3":
-                sorting.sortByCertainType(ENTERTAINMENT);
+                sortingServices.sortByCertainType(ENTERTAINMENT);
                 break;
             case "4":
-                sorting.sortByCertainType(OTHER);
+                sortingServices.sortByCertainType(OTHER);
                 break;
             default:
                 System.out.printf(WRONG_INPUT_MSG, options);

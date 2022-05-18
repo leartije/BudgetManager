@@ -1,16 +1,19 @@
-package budget;
+package budget.services;
+
+import budget.staticandenums.Categories;
+import budget.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static budget.Main.scanner;
-import static budget.MenusAndMsg.*;
+import static budget.staticandenums.MenusAndMsg.*;
 
-public class BudgetClass {
+public class BudgetServices {
     private final List<Item> itemList;
     private double balance;
 
-    public BudgetClass() {
+    public BudgetServices() {
         itemList = new ArrayList<>();
     }
 
@@ -42,7 +45,7 @@ public class BudgetClass {
 
     }
 
-    protected void purchase(Categories category) {
+    public void purchase(Categories category) {
         System.out.println(ENTER_PURCHASE_MSG);
         String item = scanner.nextLine();
         System.out.println(ENTER_PURCHASE_PRICE_MSG);

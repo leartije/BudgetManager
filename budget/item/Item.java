@@ -1,4 +1,6 @@
-package budget;
+package budget.item;
+
+import budget.staticandenums.Categories;
 
 public class Item implements Comparable<Item> {
     private final String itemName;

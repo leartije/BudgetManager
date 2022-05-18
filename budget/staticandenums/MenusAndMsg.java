@@ -1,4 +1,4 @@
-package budget;
+package budget.staticandenums;
 
 public class MenusAndMsg {
 
