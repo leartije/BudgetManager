@@ -1,14 +1,19 @@
 package budget;
 
+import java.io.File;
+
 import static budget.Categories.*;
-import static budget.Main.*;
+import static budget.Main.scanner;
 
 public class ServiceClass {
 
     private final BudgetClass budget;
+    private final IOClass ioClass;
 
     public ServiceClass() {
         this.budget = new BudgetClass();
+        File file = new File("purchases.txt");
+        this.ioClass = new IOClass(file, this.budget);
     }
 
     public void startProgram() {
@@ -32,6 +37,22 @@ public class ServiceClass {
                     break;
                 case "4":
                     budget.showBalance();
+                    break;
+                case "5":
+                    boolean isSave = ioClass.save();
+                    if (isSave) {
+                        System.out.println("Purchases were saved!\n");
+                    } else {
+                        System.out.println("Something is wrong\n");
+                    }
+                    break;
+                case "6":
+                    boolean isLoad = ioClass.load();
+                    if (isLoad) {
+                        System.out.println("Purchases were loaded!\n");
+                    } else {
+                        System.out.println("Something is wrong\n");
+                    }
                     break;
                 case "0":
                     System.out.println("Bye!");
