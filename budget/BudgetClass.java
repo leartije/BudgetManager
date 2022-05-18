@@ -30,18 +30,19 @@ public class BudgetClass {
     }
 
     public void showListOfPurchases(Categories category) {
+        String categoryName = category.name().charAt(0) + category.name()
+                .substring(1).toLowerCase();
+
         if (itemList.size() == 0) {
             System.out.println("The purchase list is empty\n");
             return;
         } else if (category.equals(Categories.ALL)) {
-            System.out.println("All:");
+            System.out.printf("%s:%n", categoryName);
             getItemList().forEach(System.out::println);
             System.out.printf("Total sum: $%.2f%n%n", getExpenses(category));
             return;
         }
-        System.out.println(category.name().charAt(0) +
-                category.name().substring(1).toLowerCase() + ":");
-
+        System.out.printf("%s:%n", categoryName);
         getItemList().stream()
                 .filter(item -> item.getCategories().equals(category))
                 .forEach(System.out::println);

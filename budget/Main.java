@@ -7,6 +7,5 @@ public class Main {
 
         ServiceClass serviceClass = new ServiceClass();
         serviceClass.startProgram();
-
     }
 }
