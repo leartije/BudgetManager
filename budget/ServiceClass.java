@@ -4,30 +4,29 @@ import java.io.File;
 
 import static budget.Categories.*;
 import static budget.Main.scanner;
+import static budget.MenusAndMsg.*;
 
 public class ServiceClass {
 
     private final BudgetClass budget;
     private final IOClass ioClass;
+    private final Sorting sorting;
 
     public ServiceClass() {
         this.budget = new BudgetClass();
-        File file = new File("purchases.txt");
+        File file = new File(FILE_NAME);
         this.ioClass = new IOClass(file, this.budget);
+        this.sorting = new Sorting(this.budget);
     }
 
     public void startProgram() {
         while (true) {
-            Menus.mainMenuMsg();
+            mainMenuMsg();
             String option = scanner.nextLine();
             System.out.println();
             switch (option) {
                 case "1":
-                    System.out.println("Enter income");
-                    double income = scanner.nextDouble();
-                    System.out.println("Income was added!\n");
-                    scanner.nextLine();
-                    budget.setBalance(income);
+                    budget.addIncome();
                     break;
                 case "2":
                     purchaseSubmenu();
@@ -41,25 +40,28 @@ public class ServiceClass {
                 case "5":
                     boolean isSave = ioClass.save();
                     if (isSave) {
-                        System.out.println("Purchases were saved!\n");
-                    } else {
-                        System.out.println("Something is wrong\n");
+                        System.out.println(SAVE_MSG);
+                        break;
                     }
+                    System.out.println(ERROR_MSG);
                     break;
                 case "6":
                     boolean isLoad = ioClass.load();
                     if (isLoad) {
-                        System.out.println("Purchases were loaded!\n");
-                    } else {
-                        System.out.println("Something is wrong\n");
+                        System.out.println(LOAD_MSG);
+                        break;
                     }
+                    System.out.println(ERROR_MSG);
+                    break;
+                case "7":
+                    analyseSubmenu();
                     break;
                 case "0":
-                    System.out.println("Bye!");
+                    System.out.println(BYE_MSG);
                     System.exit(0);
                     break;
                 default:
-                    System.out.println(option + " is not valid option\n");
+                    System.out.printf(WRONG_INPUT_MSG, option);
                     break;
             }
         }
@@ -68,48 +70,37 @@ public class ServiceClass {
     private void purchaseSubmenu() {
         boolean back = false;
         while (!back) {
-            Menus.purchaseSubmenuMsg();
+            purchaseSubmenuMsg();
             String option = scanner.nextLine();
             System.out.println();
             switch (option) {
                 case "1":
-                    purchase(FOOD);
+                    budget.purchase(FOOD);
                     break;
                 case "2":
-                    purchase(CLOTHES);
+                    budget.purchase(CLOTHES);
                     break;
                 case "3":
-                    purchase(ENTERTAINMENT);
+                    budget.purchase(ENTERTAINMENT);
                     break;
                 case "4":
-                    purchase(OTHER);
+                    budget.purchase(OTHER);
                     break;
                 case "5":
                     back = true;
                     startProgram();
                     break;
                 default:
-                    System.out.println(option + " is not valid option\n");
+                    System.out.printf(WRONG_INPUT_MSG, option);
                     break;
             }
         }
     }
 
-    private void purchase(Categories category) {
-        System.out.println("Enter purchase name:");
-        String item = scanner.nextLine();
-        System.out.println("Enter its price:");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
-        budget.getItemList().add(new Item(item, price, category));
-        budget.setBalance(budget.getBalance() - price);
-        System.out.println("Purchase was added!\n");
-    }
-
     private void showListSubmenu() {
         boolean back = false;
         while (!back) {
-            Menus.showPurchasesMenuMsg();
+            showPurchasesMenuMsg();
             String option = scanner.nextLine();
             System.out.println();
             switch (option) {
@@ -133,8 +124,62 @@ public class ServiceClass {
                     back = true;
                     break;
                 default:
-                    System.out.println("Wrong input");
+                    System.out.printf(WRONG_INPUT_MSG, option);
+                    break;
             }
         }
     }
+
+    private void analyseSubmenu() {
+        boolean back = false;
+        while (!back) {
+            analyseSubmenuMsg();
+            String option = scanner.nextLine();
+            System.out.println();
+            switch (option) {
+                case "1":
+                    sorting.sortAll();
+                    break;
+                case "2":
+                    sorting.sortByCertainType();
+                    break;
+                case "3":
+                    analyzeSubSubMenu();
+                    analyseSubmenu();
+                    break;
+                case "4":
+                    startProgram();
+                    back = true;
+                    break;
+                default:
+                    System.out.printf(WRONG_INPUT_MSG, option);
+                    break;
+            }
+        }
+    }
+
+    private void analyzeSubSubMenu() {
+        sortByTypeSubmenuMsg();
+        String options = scanner.nextLine();
+        System.out.println();
+        switch (options) {
+            case "1":
+                sorting.sortByCertainType(FOOD);
+                break;
+            case "2":
+                sorting.sortByCertainType(CLOTHES);
+                break;
+            case "3":
+                sorting.sortByCertainType(ENTERTAINMENT);
+                break;
+            case "4":
+                sorting.sortByCertainType(OTHER);
+                break;
+            default:
+                System.out.printf(WRONG_INPUT_MSG, options);
+                break;
+        }
+    }
+
+
 }
