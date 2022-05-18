@@ -1,13 +1,16 @@
 package budget;
 
-public class Items {
+public class Item {
 
     private final String itemName;
     private final double itemPrice;
 
-    public Items(String itemName, double itemPrice) {
+    private final Categories categories;
+
+    public Item(String itemName, double itemPrice, Categories categories) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.categories = categories;
     }
 
     public String getItemName() {
@@ -16,6 +19,10 @@ public class Items {
 
     public double getItemPrice() {
         return itemPrice;
+    }
+
+    public Categories getCategories() {
+        return categories;
     }
 
     @Override
