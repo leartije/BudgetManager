@@ -1,22 +1,24 @@
-package budget;
+package budget.services;
+
+import budget.staticandenums.Categories;
 
 import java.util.Collections;
 
-import static budget.Categories.*;
-import static budget.MenusAndMsg.*;
-public class Sorting {
-    private final BudgetClass budget;
+import static budget.staticandenums.Categories.*;
+import static budget.staticandenums.MenusAndMsg.*;
+public class SortingServices {
+    private final BudgetServices budget;
     private double food;
     private double entertainment;
     private double clothes;
     private double other;
     private double all;
 
-    public Sorting(BudgetClass budget) {
+    public SortingServices(BudgetServices budget) {
         this.budget = budget;
     }
 
-    protected void sortAll() {
+    public void sortAll() {
         if (budget.getItemList().size() == 0) {
             System.out.println(EMPTY_PURCHASE_LIST_MSG);
             return;
@@ -27,7 +29,7 @@ public class Sorting {
         System.out.printf(TOTAL_SUM_MSG, budget.getExpenses(ALL));
     }
 
-    protected void sortByCertainType() {
+    public void sortByCertainType() {
         setTypes();
         System.out.printf(
                 TYPES_ANALYZE_MSG,
@@ -38,7 +40,7 @@ public class Sorting {
         );
     }
 
-    protected void sortByCertainType(Categories category) {
+    public void sortByCertainType(Categories category) {
         double expenses = budget.getExpenses(category);
         if (expenses == 0.0) {
             System.out.println(EMPTY_PURCHASE_LIST_MSG);
