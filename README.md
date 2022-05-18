@@ -4,6 +4,7 @@ Jetbrains academy project in 5 stages
 Stage 1/5: Count my money
 
 Description
+
 First, let’s implement the counting of your purchases. It’s much easier to analyze when your expenses are presented as a list. Read data from the console and at the end show the list of all purchases and its total amount.
 It should be displayed as follows: Total: $23.00
 
@@ -12,6 +13,7 @@ Your program should process every line the user inputs. To end the input, the us
 Stage 2/5: Make a menu
 
 Description
+
 Let's make your application more convenient. Only counting the expenses is a little bit sad, right?
 
 To make your application flexible and functional, add a menu that consists of 4 items.
@@ -31,6 +33,7 @@ Follow this rule in the next stages.
 Stage 3/5: Oh the things you can buy
 
 Description
+
 To better control the expenses, we need to categorize our purchases. It helps to see how exactly your budget is distributed: you may be actually quite surprised!
 
 Implement a function that assigns a purchase to a specific category.
@@ -46,6 +49,7 @@ The function allows you to output the shopping list by type. After selecting the
 Stage 4/5: Memorable purchases
 
 Description
+
 What's the point of counting the money if the results are lost and forgotten once you close the program? To allow for some long-term budget planning, we need to save purchases to file. Add items Save and Load to the menu.
 
 Save should save all purchases to the file.
@@ -56,6 +60,7 @@ Use the purchases.txt file to store purchases.
 Stage 5/5: Analyzer
 
 Description
+
 Do you know how much money you spend on food? On entertainment? It's quite interesting to know since the main purpose of this application is to analyze your expenses. Let's implement this feature!
 
 First, add the Analyze item to the menu. This way you will request an analysis of your purchases.
