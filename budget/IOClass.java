@@ -3,8 +3,6 @@ package budget;
 import java.io.*;
 
 public class IOClass {
-
-
     private final File file;
     private final BudgetClass budgetClass;
 
@@ -14,7 +12,7 @@ public class IOClass {
     }
 
     public boolean save() {
-        try (FileWriter fw = new FileWriter(file)) {
+        try (BufferedWriter fw = new BufferedWriter(new FileWriter(file))) {
             for (int i = 0; i < budgetClass.getItemList().size(); i++) {
                 Item current = budgetClass.getItemList().get(i);
                 fw.write(current.getItemName() +
@@ -42,7 +40,9 @@ public class IOClass {
                             Categories.valueOf(splitCurrent[2]))
                     );
                 } else {
-                    budgetClass.setBalance(Double.parseDouble(splitCurrent[0]));
+                    double fileBalance = Double.parseDouble(splitCurrent[0]);
+                    budgetClass.setBalance(-budgetClass.getBalance());
+                    budgetClass.setBalance(fileBalance);
                 }
             }
             return true;

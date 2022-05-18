@@ -1,10 +1,8 @@
 package budget;
 
-public class Item {
-
+public class Item implements Comparable<Item> {
     private final String itemName;
     private final double itemPrice;
-
     private final Categories categories;
 
     public Item(String itemName, double itemPrice, Categories categories) {
@@ -28,5 +26,15 @@ public class Item {
     @Override
     public String toString() {
         return String.format("%s $%.2f", itemName, itemPrice);
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        if (o.getItemPrice() == this.getItemPrice()) {
+            return 0;
+        } else if (o.getItemPrice() > this.getItemPrice()) {
+            return 1;
+        }
+        return -1;
     }
 }
